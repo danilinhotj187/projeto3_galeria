@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>{{ foto.titulo }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <main class="container mx-auto p-6">
+        <div class="bg-white rounded-lg shadow-lg max-w-4xl mx-auto text-center p-8">
+            <h1 class="text-4xl font-bold mb-4">{{ foto.titulo }}</h1>
+
+            {% if foto.imagem %}
+                <img src="{{ foto.imagem.url }}" alt="{{ foto.titulo }}" class="w-full h-auto object-contain rounded-md mb-4">
+            {% endif %}
+
+            <p class="text-gray-700 text-lg mb-6">{{ foto.legenda }}</p>
+
+            <a href="{% url 'galeria_home' %}" class="text-blue-500 hover:underline">&larr; voltar</a>
+        </div>
+    </main>
+</body>
+</html>

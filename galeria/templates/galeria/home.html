@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Galeria de Fotos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-100">
+    <header class="bg-gray-800 text-white p-6 text-center">
+        <h1 class="text-4xl font-bold">Galeria de Fotos</h1>
+    </header>
+
+    <main class="container mx-auto p-6">
+        <form action="{% url 'galeria_home' %}" method="GET" class="mb-8 flex justify-center">
+            <input type="text" name="q" placeholder="pesquisar..." class="p-2 border rounded-l-md w-1/2">
+            <button type="submit" class="bg-blue-500 text-white p-2 rounded-r-md">busca</button>
+        </form>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for card in cards %}
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <a href="{% url 'foto_detalhe' card.id %}">
+                    {% if card.imagem %}
+                    <img src="{{ card.imagem.url }}" alt="{{ card.titulo }}" class="w-full h-64 object-cover">
+                    {% endif %}
+                </a>
+                <div class="p-4">
+                    <h2 class="text-xl font-semibold">{{ card.titulo }}</h2>
+                    <p class="text-gray-600 mt-1">{{ card.legenda }}</p>
+                </div>
+            </div>
+            {% empty %}
+            <p class="col-span-3 text-center text-gray-500">Nenhuma foto adicionada</p>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+</html>
+
